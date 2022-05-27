@@ -36,6 +36,8 @@ class Staff(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_created = pmodels.jDateField(auto_now_add=True)
     staff_type = models.CharField(max_length=2 ,choices=STAFF_CHOICES ,default=1)
+    #mark 
+    #duration added
 
     def __str__(self) -> str:
         return f'{self.name}'
@@ -70,6 +72,8 @@ class PhysicalRecord(models.Model):
     note = models.TextField(null=True, blank=True)
     player = models.ForeignKey(Player, on_delete=models.SET_NULL, null=True, blank=True)
     staff = models.ForeignKey(Staff,related_name="staffs_pr" ,on_delete=models.SET_NULL,blank=True, null=True)
+    #cordination
+    
 
 
 

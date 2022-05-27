@@ -5,7 +5,7 @@ from analysis.models import Payment, PhysicalRecord, Player, Staff, TechnicalRec
 from django_jalali.admin.filters import JDateFieldListFilter
 
 
-@admin.register(Player)
+@admin.register(Player) 
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ['id' , 'name' , 'right_hand', 'dob' , 'height' , 'weight' , 'date_created']
     search_fields = ['name']
