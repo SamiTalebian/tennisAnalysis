@@ -2,7 +2,7 @@ from operator import truediv
 from xmlrpc.client import Boolean
 from django.contrib import admin
 from analysis.models import Payment, PhysicalRecord, Player, Staff, StaffRecord, TechnicalRecord
-from django_jalali.admin.filters import JDateFieldListFilter
+#from django_jalali.admin.filters import JDateFieldListFilter
 
 
 class MyAdminSite(admin.AdminSite):

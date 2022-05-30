@@ -1,7 +1,3 @@
-from random import choices
-from sre_constants import RANGE
-from turtle import onscreenclick
-from wsgiref.validate import validator
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django_jalali.db import models as pmodels
