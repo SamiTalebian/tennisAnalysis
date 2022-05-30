@@ -48,14 +48,13 @@ class TechnicalRecord(models.Model):
     forehand = models.IntegerField(validators = RANGE_VALIDATOR)
     backhand = models.IntegerField(validators = RANGE_VALIDATOR)
     serve = models.IntegerField(validators = RANGE_VALIDATOR)
-    class_duration = models.FloatField(default=1, null=False, blank=False)
     volley = models.IntegerField(validators = RANGE_VALIDATOR)
     movement = models.IntegerField(validators = RANGE_VALIDATOR)
     listening = models.IntegerField(validators = RANGE_VALIDATOR)
     date_created = pmodels.jDateField(auto_now_add = True)
     note = models.TextField(null=True, blank=True)
-    player = models.ForeignKey(Player, on_delete=models.SET_NULL, null=True, blank=True)
-    staff = models.ForeignKey(Staff,related_name="staffs" ,on_delete=models.SET_NULL,blank=True, null=True)
+    player = models.ForeignKey(Player, on_delete=models.DO_NOTHING)
+    staff = models.ForeignKey(Staff,related_name="staffs" ,on_delete=models.DO_NOTHING)
 
 
 class PhysicalRecord(models.Model):
@@ -65,11 +64,19 @@ class PhysicalRecord(models.Model):
     stamina = models.IntegerField(validators = RANGE_VALIDATOR)
     stretching = models.IntegerField(validators= RANGE_VALIDATOR)
     movement = models.IntegerField(validators= RANGE_VALIDATOR)
-    class_duration = models.FloatField(default=1, null=False, blank=False)
     attention = models.IntegerField(validators= RANGE_VALIDATOR)
     note = models.TextField(null=True, blank=True)
     player = models.ForeignKey(Player, on_delete=models.SET_NULL, null=True, blank=True)
     staff = models.ForeignKey(Staff,related_name="staffs_pr" ,on_delete=models.SET_NULL,blank=True, null=True)
+
+class StaffRecord(models.Model):
+    RANGE_VALIDATOR = [MaxValueValidator(100), MinValueValidator(0)]
+
+    date_created = pmodels.jDateField(auto_now_add = True)
+    class_duration = models.FloatField(default=1, null=False, blank=False)
+    mark = models.IntegerField(validators = RANGE_VALIDATOR)
+    staff = models.ForeignKey(Staff,related_name="staffs_sr" ,on_delete=models.SET_NULL,blank=True, null=True)
+
 
 
 

@@ -79,6 +79,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default':{
+    #     'ENGINE' : 'django.db.backends.mysql',
+    #     'NAME' : 'atpanaly_database',
+    #     'HOST' : 'atp-analysis.com',
+    #     'USER' : 'atpanaly_sami'
+    # }
 }
 
 

@@ -1,8 +1,18 @@
 from operator import truediv
 from xmlrpc.client import Boolean
 from django.contrib import admin
-from analysis.models import Payment, PhysicalRecord, Player, Staff, TechnicalRecord
+from analysis.models import Payment, PhysicalRecord, Player, Staff, StaffRecord, TechnicalRecord
 from django_jalali.admin.filters import JDateFieldListFilter
+
+
+class MyAdminSite(admin.AdminSite):
+    def get_app_list(self, request):
+        app_dict = self._build_app_dict(request)
+        app_list = sorted(app_dict.values(), key=lambda x: x['name'].lower())
+        # reorder the app list as you like
+        return app_list
+    admin.AdminSite.get_app_list = get_app_list
+
 
 
 @admin.register(Player)
@@ -20,11 +30,9 @@ class StaffAdmin(admin.ModelAdmin):
 
     def time_in_court(self, obj):
         sum = 0
-        for i in obj.staffs.all():
+        for i in obj.staffs_sr.all():
             sum += i.class_duration
 
-        for i in obj.staffs_pr.all():
-            sum += i.class_duration
         return sum
     
     def staff_last_payment(self, obj):
@@ -33,12 +41,12 @@ class StaffAdmin(admin.ModelAdmin):
 
     def time_in_court_since_last_payment(self, obj):
         sum = 0
+
         last_payment = obj.payments.order_by('payment_date').last()
-        for i in obj.staffs.all():
-            if str(i.date_created) > str(last_payment):
-                sum += i.class_duration
-        
-        for i in obj.staffs_pr.all():
+        if last_payment is None:
+            return self.time_in_court(obj)
+
+        for i in obj.staffs_sr.all():
             if str(i.date_created) > str(last_payment):
                 sum += i.class_duration
 
@@ -73,3 +81,8 @@ class PhysicalRecordAdmin(admin.ModelAdmin):
         return len(obj.note) > 0
 
     has_note.boolean = True
+
+@admin.register(StaffRecord)
+class StaffRecordAdmin(admin.ModelAdmin):
+    list_display = ['id' , 'staff', 'date_created' , 'class_duration' , 'mark']
+    search_fields = ['staff', 'date_created']
