@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from analysis.views import player_detail
+
 admin.site.site_header = 'ATP Analysis'
 admin.site.site_title = 'ATP Admin'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('player-status/<uuid>', player_detail)
 ]

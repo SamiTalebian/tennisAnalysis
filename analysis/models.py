@@ -1,9 +1,11 @@
+from uuid import uuid4
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django_jalali.db import models as pmodels
 
 
 class Player(models.Model):
+    uuid = models.UUIDField(default=uuid4, null=False, unique=True)
     name = models.CharField(max_length=255, unique=True)
     right_hand = models.BooleanField()
     dob = pmodels.jDateField()
