@@ -18,6 +18,7 @@ class MyAdminSite(admin.AdminSite):
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
     list_display = ['id' , 'name' , 'right_hand', 'dob' , 'height' , 'weight' , 'date_created']
+    list_display_links = ('id','name')
     search_fields = ['name']
 
 
@@ -25,6 +26,7 @@ class PlayerAdmin(admin.ModelAdmin):
 @admin.register(Staff)
 class StaffAdmin(admin.ModelAdmin):
     list_display = ['id' , 'name' , 'date_created', 'time_in_court', 'staff_last_payment','time_in_court_since_last_payment']
+    list_display_links = ('id','name')
     search_fields = ['name']
 
 
@@ -55,12 +57,14 @@ class StaffAdmin(admin.ModelAdmin):
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ['id', 'payment_date', 'staff']
+    list_display_links = ('id','staff')
     list_filter = ['staff']
 
 
 @admin.register(TechnicalRecord)
 class TechnicalRecordAdmin(admin.ModelAdmin):
     list_display = ['id' , 'player', 'staff' , 'class_date' ,'date_created', 'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
+    list_display_links = ('id','player')
     search_fields = ['player__name', 'staff__name']
 
     list_filter = ['staff']
@@ -73,6 +77,7 @@ class TechnicalRecordAdmin(admin.ModelAdmin):
 @admin.register(PhysicalRecord)
 class PhysicalRecordAdmin(admin.ModelAdmin):
     list_display = ['id' , 'player', 'staff' , 'date_created' , 'class_date','stamina' , 'stretching' , 'movement' , 'attention', 'has_note' ]
+    list_display_links = ('id','player')
     search_fields = ['player__name', 'staff__name']
 
     list_filter = ['staff']
@@ -85,4 +90,5 @@ class PhysicalRecordAdmin(admin.ModelAdmin):
 @admin.register(StaffRecord)
 class StaffRecordAdmin(admin.ModelAdmin):
     list_display = ['id' , 'staff', 'date_created' , 'class_duration' , 'mark']
+    list_display_links = ('id','staff')
     search_fields = ['staff', 'date_created']
