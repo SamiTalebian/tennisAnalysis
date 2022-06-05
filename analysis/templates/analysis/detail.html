@@ -17,6 +17,7 @@
                     <th>Movement</th>
                     <th>Listening</th>
                     <th>Class Date</th>
+                    <th>Note</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -28,7 +29,8 @@
                     <td>{{record.volley}}</td>
                     <td>{{record.movement}}</td>
                     <td>{{record.listening}}</td>
-                    <td>{{record.date_created}}</td>
+                    <td>{{record.class_date}}</td>
+                    <td class="note">{{record.note}}</td>
                 </tr>
                 {% endfor %}
                 <tbody>

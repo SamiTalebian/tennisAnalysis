@@ -16,7 +16,9 @@ h2{
     color: black;
     padding: 30px 0;
 }
-
+.note{
+    font-family: "B-Nazanin";
+}
 /* Table Styles */
 
 .table-wrapper{
