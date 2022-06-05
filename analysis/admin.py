@@ -60,7 +60,7 @@ class PaymentAdmin(admin.ModelAdmin):
 
 @admin.register(TechnicalRecord)
 class TechnicalRecordAdmin(admin.ModelAdmin):
-    list_display = ['id' , 'player', 'staff' , 'date_created', 'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
+    list_display = ['id' , 'player', 'staff' , 'class_date' ,'date_created', 'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
     search_fields = ['player__name', 'staff__name']
 
     list_filter = ['staff']
@@ -72,7 +72,7 @@ class TechnicalRecordAdmin(admin.ModelAdmin):
 
 @admin.register(PhysicalRecord)
 class PhysicalRecordAdmin(admin.ModelAdmin):
-    list_display = ['id' , 'player', 'staff' , 'stamina' , 'stretching' , 'movement' , 'attention', 'has_note' ,'date_created']
+    list_display = ['id' , 'player', 'staff' , 'date_created' , 'class_date','stamina' , 'stretching' , 'movement' , 'attention', 'has_note' ]
     search_fields = ['player__name', 'staff__name']
 
     list_filter = ['staff']

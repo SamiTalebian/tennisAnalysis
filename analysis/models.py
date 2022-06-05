@@ -1,7 +1,9 @@
+from pickle import TRUE
 from uuid import uuid4
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django_jalali.db import models as pmodels
+import django_jalali.admin as jadmin
 
 
 class Player(models.Model):
@@ -50,6 +52,7 @@ class TechnicalRecord(models.Model):
     movement = models.IntegerField(validators = RANGE_VALIDATOR)
     listening = models.IntegerField(validators = RANGE_VALIDATOR)
     date_created = pmodels.jDateField(auto_now_add = True)
+    class_date = pmodels.jDateField(null=True, blank=True)
     note = models.TextField(null=True, blank=True)
     player = models.ForeignKey(Player, on_delete=models.DO_NOTHING)
     staff = models.ForeignKey(Staff,related_name="staffs" ,on_delete=models.DO_NOTHING)
@@ -59,6 +62,7 @@ class PhysicalRecord(models.Model):
     RANGE_VALIDATOR = [MaxValueValidator(100), MinValueValidator(0)]
 
     date_created = pmodels.jDateField(auto_now_add = True)
+    class_date = pmodels.jDateField(null=True, blank=True)
     stamina = models.IntegerField(validators = RANGE_VALIDATOR)
     stretching = models.IntegerField(validators= RANGE_VALIDATOR)
     movement = models.IntegerField(validators= RANGE_VALIDATOR)
