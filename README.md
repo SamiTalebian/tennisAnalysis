@@ -1,4 +1,5 @@
-<h3><bold>Tennis Analysis</bold> is a simple app for tennis coach and players to track thier process</h3>
+<h2><bold>Tennis Analysis</bold></h2>
+<h4>Tennis Analysis is a simple app for tennis coach and players to track thier process. This app uses Django freamwork with minimum usage of any third part packacges, this app inculdes an admin interface and a simple view for plyaers to see their activity built with HTML and CSS.</h4>
 <ul>
   <li>Tracking every measure of a player after a session</li>
   <li>Tracking every coach activity which is a benefit for clubs</li>
