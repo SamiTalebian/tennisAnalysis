@@ -45,10 +45,10 @@ class Staff(models.Model):
 class TechnicalRecord(models.Model):
     RANGE_VALIDATOR = [MaxValueValidator(100), MinValueValidator(0)]
 
-    forehand = models.IntegerField(validators = RANGE_VALIDATOR)
-    backhand = models.IntegerField(validators = RANGE_VALIDATOR)
-    serve = models.IntegerField(validators = RANGE_VALIDATOR)
-    volley = models.IntegerField(validators = RANGE_VALIDATOR)
+    forehand = models.IntegerField(validators = RANGE_VALIDATOR,null=True,blank=True,default=0)
+    backhand = models.IntegerField(validators = RANGE_VALIDATOR,null=True,blank=True,default=0)
+    serve = models.IntegerField(validators = RANGE_VALIDATOR,null=True,blank=True,default=0)
+    volley = models.IntegerField(validators = RANGE_VALIDATOR,null=True,blank=True,default=0)
     movement = models.IntegerField(validators = RANGE_VALIDATOR)
     listening = models.IntegerField(validators = RANGE_VALIDATOR)
     date_created = pmodels.jDateField(auto_now_add = True)
