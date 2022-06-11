@@ -51,10 +51,11 @@ class TechnicalRecord(models.Model):
     volley = models.IntegerField(validators = RANGE_VALIDATOR,null=True,blank=True,default=0)
     movement = models.IntegerField(validators = RANGE_VALIDATOR)
     listening = models.IntegerField(validators = RANGE_VALIDATOR)
+    class_duration = models.FloatField(default=1, null=False, blank=False)
     date_created = pmodels.jDateField(auto_now_add = True)
     class_date = pmodels.jDateField(null=True, blank=True)
     note = models.TextField(null=True, blank=True)
-    player = models.ForeignKey(Player, on_delete=models.DO_NOTHING)
+    player = models.ForeignKey(Player,related_name='players' ,on_delete=models.DO_NOTHING)
     staff = models.ForeignKey(Staff,related_name="staffs" ,on_delete=models.DO_NOTHING)
 
 

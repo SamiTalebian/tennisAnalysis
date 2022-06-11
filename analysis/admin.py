@@ -17,9 +17,19 @@ class MyAdminSite(admin.AdminSite):
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ['id' , 'name' , 'right_hand', 'dob' , 'height' , 'weight' , 'date_created']
+    list_display = ['id' , 'name' , 'right_hand', 'dob' , 'height' , 'weight' , 'time_in_court' , 'date_created' ,'url']
     list_display_links = ('id','name')
     search_fields = ['name']
+
+    def url(self, obj):
+        return 'https://atp-analysis.herokuapp.com/player-status/' + str(obj.uuid)
+    
+    def time_in_court(self, obj):
+        sum = 0
+        for i in obj.players.all():
+            sum += i.class_duration
+        
+        return sum
 
 
 
@@ -63,7 +73,7 @@ class PaymentAdmin(admin.ModelAdmin):
 
 @admin.register(TechnicalRecord)
 class TechnicalRecordAdmin(admin.ModelAdmin):
-    list_display = ['id' , 'player', 'staff' , 'class_date' ,'date_created', 'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
+    list_display = ['id' , 'player', 'staff' , 'class_date' ,'date_created','class_duration' ,'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
     list_display_links = ('id','player')
     search_fields = ['player__name', 'staff__name']
 
