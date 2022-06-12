@@ -27,12 +27,18 @@ class AnalysisInteractor():
         self.avg['movement'] = TechnicalRecord.objects.all().aggregate(Avg('movement'))
         self.avg['listening'] = TechnicalRecord.objects.all().aggregate(Avg('listening'))
 
+    def _get_player_avgs(self):
+        self.p_avg = {'movement' : 0 , 'listening' : 0}
+        self.p_avg['movement'] = TechnicalRecord.objects.filter(player__uuid=self.uuid).all().aggregate(Avg('movement'))
+        self.p_avg['listening'] = TechnicalRecord.objects.filter(player__uuid=self.uuid).aggregate(Avg('listening'))
+
     def execute(self):
         self._get_player_records()
         self._check_records()
         self._get_avgs()
+        self._get_player_avgs()
 
-        return {'Avg':self.avg,'player':self.player,'records': self.technical_records}
+        return {'Avg':self.avg,'p_Avg':self.p_avg ,'player':self.player,'records': self.technical_records}
         
     
        

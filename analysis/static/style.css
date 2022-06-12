@@ -29,6 +29,9 @@ h2{
 .avg-row{
     background-color: cadetblue;
 }
+.avg-row-p{
+    background-color: lightblue;
+}
 
 .fl-table {
     border-radius: 5px;
