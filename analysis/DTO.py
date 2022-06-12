@@ -29,6 +29,6 @@ class AnalysisDTO():
     
     def avgs(self, db_model):
         return {
-            'movement_avg' : db_model['movement']['movement__avg'],
-            'listening_avg' : db_model['listening']['listening__avg']
+            'movement_avg' : round(db_model['movement']['movement__avg'],2),
+            'listening_avg' : round(db_model['listening']['listening__avg'],2)
         }

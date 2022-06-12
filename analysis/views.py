@@ -1,5 +1,5 @@
 from django.http import Http404, HttpResponse, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render 
 from analysis.interactor import AnalysisInteractor
 from analysis.models import Player, TechnicalRecord
 
