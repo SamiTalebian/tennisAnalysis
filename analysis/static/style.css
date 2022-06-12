@@ -26,6 +26,10 @@ h2{
     box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
 }
 
+.avg-row{
+    background-color: cadetblue;
+}
+
 .fl-table {
     border-radius: 5px;
     font-size: 12px;

@@ -26,3 +26,9 @@ class AnalysisDTO():
             "name" : db_model.name,
             "dob" : db_model.dob
         }
+    
+    def avgs(self, db_model):
+        return {
+            'movement_avg' : db_model['movement']['movement__avg'],
+            'listening_avg' : db_model['listening']['listening__avg']
+        }
