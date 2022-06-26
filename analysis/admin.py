@@ -17,9 +17,11 @@ class MyAdminSite(admin.AdminSite):
 
 @admin.register(Player)
 class PlayerAdmin(admin.ModelAdmin):
-    list_display = ['id' , 'name' , 'right_hand', 'dob' , 'height' , 'weight' , 'time_in_court' , 'date_created' ,'url']
+    list_display = ['id' , 'name', 'right_hand', 'dob' , 'height' , 'weight' , 'time_in_court' , 'date_created' ,'url']
     list_display_links = ('id','name')
     search_fields = ['name']
+    list_per_page = 30
+
 
     def url(self, obj):
         return 'https://atp-analysis.herokuapp.com/player-status/' + str(obj.uuid)

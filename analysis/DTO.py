@@ -15,7 +15,8 @@ class AnalysisDTO():
             "movement" : db_model.movement,
             "listening" : db_model.listening,
             "class_date" : db_model.class_date if db_model.class_date is not None else "-",
-            "note" : db_model.note if db_model.note is not None else "-" 
+            "note" : db_model.note if db_model.note is not None else "-",
+            "class_duration" : db_model.class_duration
         }
     
     def player_status_list(self, db_models):
