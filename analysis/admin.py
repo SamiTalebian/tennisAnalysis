@@ -75,6 +75,7 @@ class PaymentAdmin(admin.ModelAdmin):
 
 @admin.register(TechnicalRecord)
 class TechnicalRecordAdmin(admin.ModelAdmin):
+    fields = (('player','staff'),('class_date','class_duration'),('forehand' , 'backhand') , ('serve' , 'volley'), ('movement' , 'listening'), 'note')
     list_display = ['id' , 'player', 'staff' , 'class_date' ,'date_created','class_duration' ,'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
     list_display_links = ('id','player')
     search_fields = ['player__name', 'staff__name']
@@ -84,6 +85,7 @@ class TechnicalRecordAdmin(admin.ModelAdmin):
 
     def has_note(self, obj) -> Boolean:
         return len(obj.note) > 0
+
 
     has_note.boolean = True
 
