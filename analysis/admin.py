@@ -83,6 +83,17 @@ class TechnicalRecordAdmin(admin.ModelAdmin):
 
     list_filter = ['staff']
 
+    def get_changeform_initial_data(self, request):
+        return {'forehand':None,'backhand':None,'serve':None,'volley':None}
+    
+    
+    def save_model(self, request, obj, form, change):
+        obj.forehand = 0 if obj.forehand == None else obj.forehand 
+        obj.backhand = 0 if obj.backhand == None else obj.backhand 
+        obj.serve = 0 if obj.serve == None else obj.serve 
+        obj.volley = 0 if obj.volley == None else obj.volley 
+        super().save_model(request, obj, form, change)
+
     def has_note(self, obj) -> Boolean:
         return len(obj.note) > 0
 
