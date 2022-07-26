@@ -31,5 +31,12 @@ class AnalysisDTO():
     def avgs(self, db_model):
         return {
             'movement_avg' : round(db_model['movement']['movement__avg'],2),
-            'listening_avg' : round(db_model['listening']['listening__avg'],2)
+            'listening_avg' : round(db_model['listening']['listening__avg'],2),
+            'forehand_avg' : round(db_model['forehand']['forehand__avg'],2),
+            'backhand_avg' : round(db_model['backhand']['backhand__avg'],2),
+            'serve_avg' : round(db_model['serve']['serve__avg'],2),
+            'volley_avg' : round(db_model['volley']['volley__avg'],2)
         }
+    
+    def media(self , db_models):
+        return [{'note':item.note, 'url':item.media_url} for item in db_models]

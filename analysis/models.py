@@ -81,6 +81,14 @@ class StaffRecord(models.Model):
     staff = models.ForeignKey(Staff,related_name="staffs_sr" ,on_delete=models.SET_NULL,blank=True, null=True)
 
 
+class PlayerMedia(models.Model):
+    media_url = models.URLField(max_length=600)
+    note = models.TextField()
+    players = models.ManyToManyField(Player, related_name="player_media")
+
+
+
+
 
 
 

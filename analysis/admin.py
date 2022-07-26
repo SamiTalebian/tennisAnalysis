@@ -1,7 +1,7 @@
 from operator import truediv
 from xmlrpc.client import Boolean
 from django.contrib import admin
-from analysis.models import Payment, PhysicalRecord, Player, Staff, StaffRecord, TechnicalRecord
+from analysis.models import Payment, PhysicalRecord, Player, PlayerMedia, Staff, StaffRecord, TechnicalRecord
 #from django_jalali.admin.filters import JDateFieldListFilter
 
 
@@ -118,3 +118,12 @@ class StaffRecordAdmin(admin.ModelAdmin):
     list_display = ['id' , 'staff', 'date_created' , 'class_duration' , 'mark']
     list_display_links = ('id','staff')
     search_fields = ['staff', 'date_created']
+
+@admin.register(PlayerMedia)
+class PlayerMediaAdmin(admin.ModelAdmin):
+    list_display = ['id','player_names','media_url','note']
+    list_display_links = ['id','player_names']
+    filter_horizontal = ['players']
+
+    def player_names(self, instance):
+        return [item.name for item in instance.players.all()]

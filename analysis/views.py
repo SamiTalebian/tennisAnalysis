@@ -15,5 +15,7 @@ def player_detail(request, uuid):
     return render(request, 'analysis/detail.html', {'records': dto_class.player_status_list(db_models=body['records']),
      'player': dto_class.player(db_model=body['player']),
      'avgs' : dto_class.avgs(db_model=body['Avg']),
-     'p_avgs': dto_class.avgs(db_model=body['p_Avg'])
+     'p_avgs': dto_class.avgs(db_model=body['p_Avg']),
+     'medias' : dto_class.media(db_models=body['media']),
+     'records_count' : body['records_count']
      })
