@@ -8,6 +8,8 @@ django = "*"
 django-jalali = "*"
 gunicorn = "*"
 django-heroku = "*"
+django-static-precompiler = "*"
+django-compressor = "*"
 
 [dev-packages]
 

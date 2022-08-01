@@ -2,7 +2,7 @@
 
 from django.http import Http404, HttpResponseNotFound
 from analysis.models import Player, PlayerMedia, TechnicalRecord
-from django.db.models import Avg, Q
+from django.db.models import Avg, Q, F
 
 class AnalysisInteractor():
     def __init__(self):
@@ -14,7 +14,7 @@ class AnalysisInteractor():
     def _get_player_records(self):
         try:
             self.player = Player.objects.get(uuid=self.uuid)
-            self.technical_records = TechnicalRecord.objects.filter(player__uuid=self.uuid).order_by('-class_date')
+            self.technical_records = TechnicalRecord.objects.filter(player__uuid=self.uuid).order_by('-id')
         except:
             raise Http404("Player not found!")
 
@@ -46,6 +46,21 @@ class AnalysisInteractor():
         for item in PlayerMedia.objects.values_list('players','id'):
             if item[0] == self.player.id:
                 self.media.append(PlayerMedia.objects.get(id=item[1]))
+    
+    def _get_bar_data(self):
+        self.bar_datas = []
+
+        signeture_data = self.technical_records.order_by('id').annotate(sum=(F('forehand') + F('listening') + F('movement') + F('backhand') + F('serve') + F('volley'))/6)
+        
+        first_data = signeture_data.first()
+        last_data = signeture_data.last()
+
+        self.bar_datas.append(first_data)
+        self.bar_datas.append(last_data)
+
+        return self.bar_datas
+
+
 
     def execute(self):
         self._get_player_records()
@@ -53,10 +68,12 @@ class AnalysisInteractor():
         self._get_avgs()
         self._get_player_avgs()
         self._get_player_media()
+        self._get_bar_data()
 
         return {'Avg':self.avg,'p_Avg':self.p_avg ,
         'player':self.player, 'records': self.technical_records ,
-        'media' : self.media, 'records_count' : TechnicalRecord.objects.count()}
+        'media' : self.media, 'records_count' : TechnicalRecord.objects.count(),
+        'bar_datas' : self.bar_datas}
         
     
        

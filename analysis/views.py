@@ -17,5 +17,6 @@ def player_detail(request, uuid):
      'avgs' : dto_class.avgs(db_model=body['Avg']),
      'p_avgs': dto_class.avgs(db_model=body['p_Avg']),
      'medias' : dto_class.media(db_models=body['media']),
+     'bar_datas' : dto_class.bar_datas(db_models=body['bar_datas']),
      'records_count' : body['records_count']
      })

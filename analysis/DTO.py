@@ -40,3 +40,6 @@ class AnalysisDTO():
     
     def media(self , db_models):
         return [{'note':item.note, 'url':item.media_url} for item in db_models]
+    
+    def bar_datas(self, db_models):
+        return [{'date':str(item.class_date), 'data':item.sum} for item in db_models]
