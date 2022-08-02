@@ -7,7 +7,7 @@
     </head>
     <body> 
         <h2>{{player.name}} / {{player.dob}}</h2>
-        <h3 style="margin:0px 70px;direction: rtl;">عملکرد بازیکن به تفکیک هر جلسه</h3>
+        <h3 style="margin:0px 70px;direction: rtl;">عملکرد بازیکن به تفکیک هر جلسه (مجموع <span style='color: #388F76'>{{total_time}}</span> ساعت)</h3>
         <div class="table-wrapper">
             <table class="fl-table">
                 <thead>
@@ -65,7 +65,7 @@
                     </tbody>
                 </table>
             </div>
-            <h3 style="margin:0px 70px; direction: rtl;">  میانگین کل از بین <span style='color: #388F76'>{{records_count}}</span> رکورد</h3>
+            <h3 style="margin:0px 70px; direction: rtl;">  میانگین کل از بین <span style='color: #388F76'>{{records_count}}</span> تمرین ثبت شده</h3>
             <div class="table-wrapper">
                 <table class="fl-table">
                     <thead>

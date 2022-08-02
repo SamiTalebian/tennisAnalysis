@@ -2,7 +2,9 @@
 
 from django.http import Http404, HttpResponseNotFound
 from analysis.models import Player, PlayerMedia, TechnicalRecord
-from django.db.models import Avg, Q, F
+from django.db.models import Avg, Q, F, Sum
+import random
+import operator
 
 class AnalysisInteractor():
     def __init__(self):
@@ -15,6 +17,7 @@ class AnalysisInteractor():
         try:
             self.player = Player.objects.get(uuid=self.uuid)
             self.technical_records = TechnicalRecord.objects.filter(player__uuid=self.uuid).order_by('-id')
+            self.time_in_court = TechnicalRecord.objects.filter(player__uuid=self.uuid).aggregate(total_time=Sum('class_duration'))
         except:
             raise Http404("Player not found!")
 
@@ -50,15 +53,21 @@ class AnalysisInteractor():
     def _get_bar_data(self):
         self.bar_datas = []
 
-        signeture_data = self.technical_records.order_by('id').annotate(sum=(F('forehand') + F('listening') + F('movement') + F('backhand') + F('serve') + F('volley'))/6)
-        
+        signeture_data = self.technical_records.order_by('-id').annotate(sum=(F('forehand') + F('listening') + F('movement') + F('backhand') + F('serve') + F('volley'))/6)
+    
         first_data = signeture_data.first()
-        last_data = signeture_data.last()
-
         self.bar_datas.append(first_data)
+        
+        for i in range(3):
+            temp_record = random.choice(signeture_data)
+            while temp_record.id == signeture_data.first().id or temp_record == signeture_data.last().id:
+                temp_record = random.choice(signeture_data)
+            self.bar_datas.append(temp_record)
+
+        last_data = signeture_data.last()
         self.bar_datas.append(last_data)
 
-        return self.bar_datas
+        return sorted(self.bar_datas, reverse=False ,key=operator.attrgetter('id'))
 
 
 
@@ -73,7 +82,7 @@ class AnalysisInteractor():
         return {'Avg':self.avg,'p_Avg':self.p_avg ,
         'player':self.player, 'records': self.technical_records ,
         'media' : self.media, 'records_count' : TechnicalRecord.objects.count(),
-        'bar_datas' : self.bar_datas}
+        'bar_datas' : self.bar_datas, 'total_time' : self.time_in_court['total_time']}
         
     
        

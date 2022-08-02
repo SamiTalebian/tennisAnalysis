@@ -35,7 +35,7 @@ class AnalysisDTO():
             'forehand_avg' : round(db_model['forehand']['forehand__avg'],2),
             'backhand_avg' : round(db_model['backhand']['backhand__avg'],2),
             'serve_avg' : round(db_model['serve']['serve__avg'],2),
-            'volley_avg' : round(db_model['volley']['volley__avg'],2)
+            'volley_avg' : round(db_model['volley']['volley__avg'],2),
         }
     
     def media(self , db_models):
