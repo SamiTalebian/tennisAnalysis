@@ -84,6 +84,7 @@ class StaffRecord(models.Model):
 class PlayerMedia(models.Model):
     media_url = models.URLField(max_length=600)
     note = models.TextField()
+    date_created = pmodels.jDateField(auto_now_add=True, null=True)
     players = models.ManyToManyField(Player, related_name="player_media")
 
 

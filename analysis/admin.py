@@ -121,7 +121,7 @@ class StaffRecordAdmin(admin.ModelAdmin):
 
 @admin.register(PlayerMedia)
 class PlayerMediaAdmin(admin.ModelAdmin):
-    list_display = ['id','player_names','media_url','note']
+    list_display = ['id','player_names','media_url','note','date_created']
     list_display_links = ['id','player_names']
     filter_horizontal = ['players']
 
