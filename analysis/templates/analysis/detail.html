@@ -96,6 +96,7 @@
                     <thead>
                         <tr>
                             <th>URL</th>
+                            <th>Date Assigned</th>
                             <th>Note</th>
                         </tr>
                     </thead>
@@ -103,6 +104,7 @@
                     {% for media in medias%}
                         <tr>
                             <td><a style="font-size: 12px;" href={{media.url}} target="_blank">{{media.url}}</a></td>
+                            <td style="font-size: 12px;">{{media.date}}</td>
                             <td style="font-size: 18px;">{{media.note}}</td>
                         </tr>
                     {% endfor %}
