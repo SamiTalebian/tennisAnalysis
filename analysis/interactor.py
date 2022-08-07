@@ -55,19 +55,15 @@ class AnalysisInteractor():
 
         signeture_data = self.technical_records.order_by('-id').annotate(sum=(F('forehand') + F('listening') + F('movement') + F('backhand') + F('serve') + F('volley'))/6)
     
-        first_data = signeture_data.first()
-        self.bar_datas.append(first_data)
+        data_count = signeture_data.count()
+
+        self.bar_datas.append(signeture_data[data_count-1])
+        self.bar_datas.append(signeture_data[data_count-2])
+        self.bar_datas.append(signeture_data[int(data_count/2)])
+        self.bar_datas.append(signeture_data[1])
+        self.bar_datas.append(signeture_data[0])
         
-        for i in range(3):
-            temp_record = random.choice(signeture_data)
-            while temp_record.id == signeture_data.first().id or temp_record == signeture_data.last().id:
-                temp_record = random.choice(signeture_data)
-            self.bar_datas.append(temp_record)
-
-        last_data = signeture_data.last()
-        self.bar_datas.append(last_data)
-
-        return sorted(self.bar_datas, reverse=False ,key=operator.attrgetter('id'))
+        return self.bar_datas
 
 
 
