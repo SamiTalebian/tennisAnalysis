@@ -32,10 +32,10 @@ class AnalysisDTO():
         return {
             'movement_avg' : round(db_model['movement']['movement__avg'],2),
             'listening_avg' : round(db_model['listening']['listening__avg'],2),
-            'forehand_avg' : round(db_model['forehand']['forehand__avg'],2),
-            'backhand_avg' : round(db_model['backhand']['backhand__avg'],2),
-            'serve_avg' : round(db_model['serve']['serve__avg'],2),
-            'volley_avg' : round(db_model['volley']['volley__avg'],2),
+            'forehand_avg' : round(db_model['forehand']['forehand__avg'],2) if db_model['forehand']['forehand__avg'] is not None else 0,
+            'backhand_avg' : round(db_model['backhand']['backhand__avg'],2) if db_model['backhand']['backhand__avg'] is not None else 0,
+            'serve_avg' : round(db_model['serve']['serve__avg'],2) if db_model['serve']['serve__avg'] is not None else 0,
+            'volley_avg' : round(db_model['volley']['volley__avg'],2) if db_model['volley']['volley__avg'] is not None else 0,
         }
     
     def media(self , db_models):
