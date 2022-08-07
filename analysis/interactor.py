@@ -53,7 +53,7 @@ class AnalysisInteractor():
     def _get_bar_data(self):
         self.bar_datas = []
 
-        signeture_data = self.technical_records.order_by('-id').annotate(sum=(F('forehand') + F('listening') + F('movement') + F('backhand') + F('serve') + F('volley'))/6)
+        signeture_data = self.technical_records.order_by('-id').annotate(sum=(F('listening') + F('movement'))/2)
     
         data_count = signeture_data.count()
 
