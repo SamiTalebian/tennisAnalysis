@@ -78,6 +78,7 @@ class TechnicalRecordAdmin(admin.ModelAdmin):
     fields = (('player','staff'),('class_date','class_duration'),('forehand' , 'backhand') , ('serve' , 'volley'), ('movement' , 'listening'), 'note')
     list_display = ['id' , 'player', 'staff' , 'class_date' ,'date_created','class_duration' ,'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
     list_display_links = ('id','player')
+    list_editable = ('class_date')
     search_fields = ['player__name', 'staff__name']
     list_per_page = 30
 
@@ -124,6 +125,12 @@ class PlayerMediaAdmin(admin.ModelAdmin):
     list_display = ['id','player_names','media_url','note','date_created']
     list_display_links = ['id','player_names']
     filter_horizontal = ['players']
+    ordering = ['players__name']
+
+    def formfield_for_foreignkey(self, db_field , request, **kwargs):
+        if db_field.name == "player":
+            kwargs["queryset"] = Player.objects.order_by('name')
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def player_names(self, instance):
         return [item.name for item in instance.players.all()]
