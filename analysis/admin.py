@@ -78,7 +78,7 @@ class TechnicalRecordAdmin(admin.ModelAdmin):
     fields = (('player','staff'),('class_date','class_duration'),('forehand' , 'backhand') , ('serve' , 'volley'), ('movement' , 'listening'), 'note')
     list_display = ['id' , 'player', 'staff' , 'class_date' ,'date_created','class_duration' ,'forehand' , 'backhand' , 'serve' , 'volley' , 'movement' , 'listening' , 'has_note']
     list_display_links = ('id','player')
-    list_editable = ('class_date')
+    list_editable = ('class_date',)
     search_fields = ['player__name', 'staff__name']
     list_per_page = 30
 
