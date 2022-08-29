@@ -16,7 +16,7 @@ class AnalysisInteractor():
     def _get_player_records(self):
         try:
             self.player = Player.objects.get(uuid=self.uuid)
-            self.technical_records = TechnicalRecord.objects.filter(player__uuid=self.uuid).order_by('-id')
+            self.technical_records = TechnicalRecord.objects.filter(player__uuid=self.uuid).order_by('-class_date')
             self.time_in_court = TechnicalRecord.objects.filter(player__uuid=self.uuid).aggregate(total_time=Sum('class_duration'))
         except:
             raise Http404("Player not found!")

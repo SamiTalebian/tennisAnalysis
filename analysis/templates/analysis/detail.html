@@ -4,12 +4,26 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}" />
         <link rel="stylesheet" type="text/css" href="{% static 'bar.css'%}" />
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#table').DataTable( {
+                    paging: true,
+                    searching: false,
+                    select: true,
+                    ordering:false,
+                } );
+            });
+        </script>
     </head>
     <body> 
         <h2>{{player.name}} / {{player.dob}}</h2>
         <h3 style="margin:0px 70px;direction: rtl;">عملکرد بازیکن به تفکیک هر جلسه (مجموع <span style='color: #388F76'>{{total_time}}</span> ساعت)</h3>
         <div class="table-wrapper">
-            <table class="fl-table">
+            <table id="table" class="fl-table">
                 <thead>
                     <tr>
                         <th>Forehand</th>
@@ -18,7 +32,7 @@
                         <th>Volley</th>
                         <th>Movement</th>
                         <th>Listening</th>
-                        <th>Class Date</th>
+                        <th \>Class Date</th>
                         <th>Class Duration</th>
                         <th>Note</th>
                     </tr>
