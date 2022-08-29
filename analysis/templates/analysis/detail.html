@@ -13,7 +13,7 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#table').DataTable( {
-                    paging: true,
+                    paging: false,
                     searching: false,
                     select: true,
                     ordering:false,
@@ -25,31 +25,31 @@
         <h2>{{player.name}} / {{player.dob}}</h2>
         <h3 style="margin:0px 70px;direction: rtl;">عملکرد بازیکن به تفکیک هر جلسه (مجموع <span style='color: #388F76'>{{total_time}}</span> ساعت)</h3>
         <div class="table-wrapper">
-            <table id="table" class="fl-table table">
+            <table id="table" class="fl-table table" data-page-length='10'>
                 <thead>
                     <tr>
+                        <th>Class Date</th>
+                        <th>Class Duration</th>
                         <th>Forehand</th>
                         <th>Backhand</th>
                         <th>Serve</th>
                         <th>Volley</th>
                         <th>Movement</th>
                         <th>Listening</th>
-                        <th \>Class Date</th>
-                        <th>Class Duration</th>
                         <th>Note</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for record in records%}
                     <tr>
+                        <td>{{record.class_date}}</td>
+                        <td>{{record.class_duration}}</td>
                         <td>{{record.forehand}}</td>
                         <td>{{record.backhand}}</td>
                         <td>{{record.serve}}</td>
                         <td>{{record.volley}}</td>
                         <td>{{record.movement}}</td>
                         <td>{{record.listening}}</td>
-                        <td>{{record.class_date}}</td>
-                        <td>{{record.class_duration}}</td>
                         <td class="note">{{record.note}}</td>
                     </tr>
                     {% endfor %}
