@@ -71,6 +71,12 @@ h2{
 }
 
 /* Responsive */
+@media (max-width: 880px) {
+    h3 {
+      font-size: 14px;
+    }
+  }
+
 
 @media (max-width: 767px) {
     .fl-table {
